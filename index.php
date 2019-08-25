@@ -1,6 +1,6 @@
 <?php
 
 
-header('Location:./src/views/login.ejs');
+header('Location:app.js');
 ?>
 
