@@ -177,7 +177,7 @@ app.post("/register",function(req,res){
     })
     console.log()
     })
-app.listen(process.env.PORT||3200,function(req,res){
+app.listen(process.env.PORT || 3200,function(req,res){
     console.log("started")
 })
 
