@@ -135,10 +135,9 @@ else{
     
             
     mongoose.connect(url,function(err){
-        if(err) throw err
-        else{
+       
             console.log("database connected")
-        }
+        
     })
     app.get("/view/:id",function(req,res){
         var b=req.params.id
