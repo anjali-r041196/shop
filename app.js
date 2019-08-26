@@ -2,7 +2,7 @@ var express=require('express')
 const path=require("path")
 var mongoose=require("mongoose")
 var bodyparser=require("body-parser")
-var url="mongodb://127.0.0.1:27017/shopping"
+var url="mongodb+srv://anjalir:anjali@cluster0-vp9od.mongodb.net/test?retryWrites=true&w=majority/shopping"
 var user=require("./model/user")
 var user1=require("./model/user1")
 var app=express();
@@ -24,18 +24,16 @@ app.set("view engine","ejs")
 app.set("views","./src/views")
 app.get("/index",function(req,res){
     user1.find({},function(err,result){
-       if(err) throw err
-       else{
+       
     res.render("index",{nav:[{link:"/men",title:"men wear"},{link:"/women",title:"women wear"},{link:"/child",title:"kids wear"}],res:result})  
-       }
+       
     })
 })
 app.get("/delete",function(req,res){
     user1.find({},function(err,result){
-       if(err) throw err
-       else{
+       
     res.render("delete",{nav:[{link:"/men",title:"men wear"},{link:"/women",title:"women wear"},{link:"/child",title:"kids wear"}],res:result})  
-       }
+       
     })
 })
 app.post("/edit", type, (req,res)=>{
@@ -47,14 +45,12 @@ app.post("/edit", type, (req,res)=>{
         price : req.body.price,
         image : req.file.filename
     }}, (err,result)=>{
-        if (err) throw err;
-        else{
+       
             user1.find({},(err,result)=>{
-                if (err) throw err;
-                else
+               
                 res.render("delete",{nav:[{link:"/men",title:"men wear"},{link:"/women",title:"women wear"},{link:"/child",title:"kids wear"}],res:result})
             })
-        }
+        
     }) 
 })
 
@@ -67,12 +63,11 @@ app.post("/reg",type ,function(req,res){
     u.image=req.file.filename;
     
     u.save(function(err){
-        if(err) throw err
-        else{
+       
            user1.find({},function(err,result){
             res.render("delete",{nav:[{link:"/men",title:"men wear"},{link:"/women",title:"women wear"},{link:"/child",title:"kids wear"}],res:result})  
            })
-        }
+       
     })
     console.log()
     })
@@ -80,32 +75,31 @@ app.post("/reg",type ,function(req,res){
 app.post("/del/:id",function(req,res){
     console.log(req.params.id)
     user1.deleteOne({heading:req.params.id},function(err,result){
-       if(err) throw err
-       else{
+      
+    
            user1.find({},function(err,result){
     res.render("delete",{nav:[{link:"/men",title:"men wear"},{link:"/women",title:"women wear"},{link:"/child",title:"kids wear"}],res:result})
            })
-       }
+       
     })
 })
 app.get("/index/single/:id",function(req,res){
     var t=req.params.id
     console.log(t)
     user1.find({},function(err,result){
-       if(err) throw err
-       else{
+       
     res.render("single",{nav:[{link:"/men",title:"men wear"},{link:"/women",title:"women wear"},{link:"/child",title:"kids wear"}],res:result[t]})  
-       }
+       
     })
 })
 app.get("/delete/ed/:id",function(req,res){
     var t=req.params.id
 
     user1.find({},function(err,result){
-       if(err) throw err
-       else{
+     
+       
     res.render("edit",{nav:[{link:"/men",title:"men wear"},{link:"/women",title:"women wear"},{link:"/child",title:"kids wear"}],res:result[t]})  
-       }
+       
     })
 })
 app.get("/reg",function(req,res){
@@ -170,10 +164,9 @@ app.post("/register",function(req,res){
     u.password=req.body.password
     u.role=req.body.role;
     u.save(function(err){
-        if(err) throw err
-        else{
+        
             res.redirect("/")
-        }
+        
     })
     console.log()
     })
